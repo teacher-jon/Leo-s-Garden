@@ -14,20 +14,12 @@
             background-color: #f0fdf4;
             user-select: none;
         }
-
-        .screen-hidden {
-            display: none !important;
-        }
-
-        .fade-in-active {
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
+        .screen-hidden { display: none !important; }
+        .fade-in-active { animation: fadeIn 0.5s ease-in-out forwards; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .lined-paper {
             background-image: linear-gradient(#9ca3af 1px, transparent 1px);
             background-size: 100% 3rem;
@@ -36,7 +28,6 @@
             padding-top: 0.5rem;
             font-size: 1.25rem; 
         }
-
         .word-bank-box {
             background: #fff;
             border: 2px solid #cbd5e1;
@@ -54,22 +45,12 @@
             border-color: #22c55e;
             transform: scale(1.02);
         }
-
         .step-bubble {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: white;
-            background-color: #d1d5db;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem; color: white; background-color: #d1d5db;
         }
-        .step-active .step-bubble {
-            background-color: #16a34a;
-        }
+        .step-active .step-bubble { background-color: #16a34a; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4">
@@ -108,9 +89,7 @@
                     <i class="fa-solid fa-image text-green-600 mr-2"></i>Look at the picture.
                 </h2>
                 <div class="w-full bg-white rounded-xl shadow-md border-2 border-gray-200 overflow-hidden relative mb-4">
-                    <img src="main.png" 
-                         onerror="this.src='https://placehold.co/800x600?text=Check+Drive+Permissions'"
-                         class="w-full h-auto object-cover">
+                    <img src="main.png" class="w-full h-auto object-cover">
                 </div>
                 <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-blue-900 w-full flex items-start gap-3">
                     <button onclick="speakText('This is Leo. It is a sunny day. Leo wants to plant a garden. Look at the picture of Leo.')" class="bg-white p-2 rounded-full shadow-sm text-blue-600 hover:bg-blue-100 shrink-0">
@@ -171,9 +150,7 @@
             </div>
             <div class="bg-white border-2 border-gray-200 rounded-2xl p-2 shadow-lg mb-6 relative">
                 <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden relative">
-                    <img id="seq-img" src="" 
-                         onerror="this.src='https://placehold.co/800x600?text=Check+Drive+Permissions'"
-                         class="w-full h-full object-cover">
+                    <img id="seq-img" src="" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute -top-4 -left-4 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl border-4 border-white shadow-sm">
                     <span id="seq-num">1</span>
@@ -232,21 +209,10 @@
             </div>
             <div class="flex-grow flex flex-col relative bg-white">
                 <div class="bg-white p-2 border-b border-gray-200 flex gap-2 overflow-x-auto justify-center">
-                    <img src="https://drive.google.com/uc?export=view&id=1DeqJ7jFjueGmOI_7GXe2xFjkBlAB6Owe" 
-                         onerror="this.src='https://placehold.co/120x100?text=Error'"
-                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
-                    
-                    <img src="https://drive.google.com/uc?export=view&id=1f_LZ0YhdRLZZYebGFTc8nu2R8SInWQtz" 
-                         onerror="this.src='https://placehold.co/120x100?text=Error'"
-                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
-                    
-                    <img src="https://drive.google.com/uc?export=view&id=1l-ij32XbZyomhCSDvKWGv2jLdq6kjNkc" 
-                         onerror="this.src='https://placehold.co/120x100?text=Error'"
-                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
-                    
-                    <img src="https://drive.google.com/uc?export=view&id=11DDef72m1JHeU3zFmpdAT4nYEI_o06ib" 
-                         onerror="this.src='https://placehold.co/120x100?text=Error'"
-                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    <img src="step1.png" class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    <img src="step2.png" class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    <img src="step3.png" class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    <img src="step4.png" class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
                 </div>
                 <div class="p-4 md:p-8 flex-grow flex flex-col">
                     <textarea id="final-essay" 
@@ -308,7 +274,7 @@
         // CONFIG
         let GEMINI_API_KEY = 'AIzaSy_PASTE_YOUR_KEY_HERE'; 
         
-        // STORY DATA (Links reverted to standard format)
+        // STORY DATA (Updated with your exact file names)
         const storyData = [
             { 
                 text: "One sunny morning, Leo decides to make a garden. First, he takes his shovel and digs a small hole in the brown soil.", 
@@ -335,8 +301,7 @@
         let responses = { q1: "", q2: "", q3: "", essay: "" };
         let currentStoryIndex = 0;
 
-        // --- GLOBAL FUNCTIONS (Attached to window to prevent scope issues) ---
-
+        // GLOBAL FUNCTIONS
         window.speakText = function(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -344,7 +309,7 @@
                 u.rate = 0.9; 
                 window.speechSynthesis.speak(u);
             } else {
-                console.warn("TTS not supported in this browser.");
+                console.warn("TTS not supported.");
             }
         };
 
@@ -357,8 +322,6 @@
         window.switchScreen = function(screenId) {
             console.log("Switching to:", screenId); 
             const screens = ['welcome-screen', 'part-a-screen', 'story-sequence-screen', 'writing-screen', 'report-screen'];
-            
-            // Hide all
             screens.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
@@ -366,8 +329,6 @@
                     el.classList.remove('fade-in-active'); 
                 }
             });
-
-            // Show target
             const target = document.getElementById(screenId);
             if(target) {
                 target.classList.remove('screen-hidden');
@@ -382,7 +343,6 @@
             });
             const activeEl = document.getElementById(`progress-${step}`);
             if(activeEl) activeEl.classList.add('step-active');
-            
             const titleEl = document.getElementById('step-title');
             if(titleEl) {
                 if(step === 1) titleEl.innerText = "Part A: Questions";
@@ -418,7 +378,7 @@
             const imgEl = document.getElementById('seq-img');
             const textEl = document.getElementById('seq-text');
             const numEl = document.getElementById('seq-num');
-
+            
             if(imgEl) imgEl.src = data.img;
             if(textEl) textEl.innerText = data.text;
             if(numEl) numEl.innerText = index + 1;
@@ -431,7 +391,6 @@
 
         window.nextStoryPart = function() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            
             if (currentStoryIndex < storyData.length - 1) {
                 currentStoryIndex++;
                 window.loadStoryPart(currentStoryIndex);
@@ -456,11 +415,9 @@
             if (GEMINI_API_KEY.includes("PASTE") || GEMINI_API_KEY === "") {
                 console.log("Simulating Grading...");
                 await new Promise(r => setTimeout(r, 1500));
-
                 const wordCount = responses.essay.split(' ').length;
                 let score = "2.0";
                 let label = "Emerging";
-                
                 if (wordCount > 40) { score = "3.5"; label = "Developing"; }
                 else if (wordCount > 15) { score = "2.5"; label = "Emerging"; }
 
@@ -471,7 +428,6 @@
                     vocab_feedback: "You used good garden words like 'shovel', 'soil', and 'tiny seed'.",
                     teacher_strategy: "CAN DO: Write short narratives with a clear sequence of events. NEXT STEP: Encourage adding feelings (e.g., 'Leo was happy')."
                 };
-                
                 window.displayResults(mockData);
                 return;
             }
@@ -497,7 +453,6 @@
                 const data = await response.json();
                 let text = data.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, '').trim();
                 window.displayResults(JSON.parse(text));
-
             } catch (e) {
                 alert("API Error. Using simulation.");
                 console.error(e);
@@ -511,7 +466,6 @@
             document.getElementById('complexity-feedback').innerText = json.complexity_feedback;
             document.getElementById('vocab-feedback').innerText = json.vocab_feedback;
             document.getElementById('strategy-text').innerText = json.teacher_strategy;
-
             document.getElementById('loading-overlay').classList.add('screen-hidden');
             document.getElementById('app-header').classList.add('screen-hidden');
             window.switchScreen('report-screen');
