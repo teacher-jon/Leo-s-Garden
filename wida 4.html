@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIDA Writing: Leo's Garden (Gr 1-2)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Lexend', sans-serif;
+            background-color: #f0fdf4;
+            user-select: none;
+        }
+
+        .screen-hidden {
+            display: none !important;
+        }
+
+        .fade-in-active {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lined-paper {
+            background-image: linear-gradient(#9ca3af 1px, transparent 1px);
+            background-size: 100% 3rem;
+            background-attachment: local;
+            line-height: 3rem;
+            padding-top: 0.5rem;
+            font-size: 1.25rem; 
+        }
+
+        .word-bank-box {
+            background: #fff;
+            border: 2px solid #cbd5e1;
+            padding: 8px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .word-bank-box:hover {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+            transform: scale(1.02);
+        }
+
+        .step-bubble {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #d1d5db;
+        }
+        .step-active .step-bubble {
+            background-color: #16a34a;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <div id="app-header" class="w-full max-w-5xl flex justify-between items-center mb-6 screen-hidden">
+        <div class="flex items-center gap-4">
+            <div class="flex gap-2">
+                <div id="progress-1" class="step-active"><div class="step-bubble">A</div></div>
+                <div id="progress-2" class=""><div class="step-bubble">B</div></div>
+                <div id="progress-3" class=""><div class="step-bubble"><i class="fa-solid fa-pencil"></i></div></div>
+            </div>
+            <h1 class="text-xl font-bold text-gray-800 ml-2" id="step-title">Part A: Questions</h1>
+        </div>
+        <div class="bg-white px-4 py-2 rounded-full border border-gray-200 text-sm font-bold text-gray-500 shadow-sm">
+            Grades 1-2 • Tier A • Narrative
+        </div>
+    </div>
+
+    <div id="welcome-screen" class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-xl border-2 border-green-100 mt-10 text-center fade-in-active">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-sun text-4xl text-green-600"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Leo's Garden</h1>
+        <p class="text-gray-500 mb-8 text-lg">Narrative Writing • Grades 1-2</p>
+        
+        <button type="button" onclick="window.startTest()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-xl py-4 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+            Start <i class="fa-solid fa-play ml-2"></i>
+        </button>
+        <p class="text-sm text-gray-400 mt-6">Teacher Mode: Simulation</p>
+    </div>
+
+    <div id="part-a-screen" class="w-full max-w-6xl bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden screen-hidden">
+        <div class="grid md:grid-cols-2 h-full min-h-[600px]">
+            <div class="bg-gray-50 p-6 flex flex-col items-center border-b md:border-b-0 md:border-r border-gray-200">
+                <h2 class="text-lg font-bold text-gray-700 mb-3 w-full text-left">
+                    <i class="fa-solid fa-image text-green-600 mr-2"></i>Look at the picture.
+                </h2>
+                <div class="w-full bg-white rounded-xl shadow-md border-2 border-gray-200 overflow-hidden relative mb-4">
+                    <img src="https://drive.google.com/uc?export=view&id=1exL6ASw4geTpDJQOHZhgNFeevj9S2esJ" 
+                         onerror="this.src='https://placehold.co/800x600?text=Check+Drive+Permissions'"
+                         class="w-full h-auto object-cover">
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 text-blue-900 w-full flex items-start gap-3">
+                    <button onclick="speakText('This is Leo. It is a sunny day. Leo wants to plant a garden. Look at the picture of Leo.')" class="bg-white p-2 rounded-full shadow-sm text-blue-600 hover:bg-blue-100 shrink-0">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <p class="mt-1">This is Leo. It is a sunny day. Leo wants to plant a garden.<br>Look at the picture of Leo.</p>
+                </div>
+            </div>
+
+            <div class="p-8 flex flex-col justify-center bg-white">
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <button onclick="speakText('Number 1. Who is in the picture?')" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 flex items-center justify-center transition">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                            <label class="text-xl font-bold text-gray-800">1. Who is in the picture?</label>
+                        </div>
+                        <input type="text" id="q1" class="w-full p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-0 outline-none transition" placeholder="Write here...">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <button onclick="speakText('Number 2. What kind of day is it?')" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 flex items-center justify-center transition">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                            <label class="text-xl font-bold text-gray-800">2. What kind of day is it?</label>
+                        </div>
+                        <input type="text" id="q2" class="w-full p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-0 outline-none transition" placeholder="Write here...">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <button onclick="speakText('Number 3. What does Leo want to do?')" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 flex items-center justify-center transition">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
+                            </button>
+                            <label class="text-xl font-bold text-gray-800">3. What does Leo want to do?</label>
+                        </div>
+                        <input type="text" id="q3" class="w-full p-4 text-lg border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-0 outline-none transition" placeholder="Write here...">
+                    </div>
+                </div>
+                <div class="mt-auto pt-8 flex justify-end">
+                    <button type="button" onclick="submitPartA()" class="bg-green-600 text-white px-8 py-4 rounded-xl hover:bg-green-700 font-bold text-lg shadow-md transition flex items-center gap-3">
+                        Next Part <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="story-sequence-screen" class="w-full max-w-4xl bg-white rounded-2xl shadow-lg border border-gray-200 screen-hidden p-8 text-center min-h-[600px] flex flex-col items-center">
+        <div class="w-full max-w-3xl">
+            <div id="seq-intro" class="bg-yellow-50 border-2 border-yellow-100 p-6 rounded-xl mb-6 text-left flex gap-4">
+                <button onclick="playIntroAudio()" class="shrink-0 w-12 h-12 bg-yellow-200 rounded-full flex items-center justify-center text-yellow-800 hover:scale-105 transition">
+                    <i class="fa-solid fa-volume-high text-xl"></i>
+                </button>
+                <p class="text-lg text-yellow-900 leading-relaxed">
+                    Leo works hard in the garden. He follows steps to make things grow. Listen to the story about Leo's garden.
+                </p>
+            </div>
+            <div class="bg-white border-2 border-gray-200 rounded-2xl p-2 shadow-lg mb-6 relative">
+                <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden relative">
+                    <img id="seq-img" src="" 
+                         onerror="this.src='https://placehold.co/800x600?text=Check+Drive+Permissions'"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -top-4 -left-4 w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-xl border-4 border-white shadow-sm">
+                    <span id="seq-num">1</span>
+                </div>
+            </div>
+            <h3 id="seq-text" class="text-xl font-medium text-gray-800 mb-8 min-h-[4rem] px-4 leading-relaxed"></h3>
+            <div class="flex items-center justify-center gap-6">
+                <button onclick="speakCurrentPart()" id="seq-speak-btn" class="w-20 h-20 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-200 flex items-center justify-center text-3xl transition shadow-sm border-2 border-indigo-200">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <button onclick="nextStoryPart()" class="px-10 py-5 bg-green-600 text-white rounded-2xl hover:bg-green-700 font-bold text-xl shadow-lg transition flex items-center gap-2">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="writing-screen" class="w-full max-w-7xl bg-white rounded-2xl shadow-lg border border-gray-200 screen-hidden flex flex-col h-[90vh]">
+        <div class="bg-blue-50 border-b border-blue-100 p-4 flex items-center gap-4">
+             <button onclick="speakText('Now it is your turn. Write a story about what Leo does in the garden. Tell what happens first, next, and last. Use the word box to help you.')" class="w-10 h-10 rounded-full bg-white text-blue-600 hover:bg-blue-100 flex items-center justify-center shadow-sm shrink-0">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <p class="text-blue-900 font-medium text-lg">
+                Write a <b>story</b> about what Leo does in the garden. Tell what happens first, next, and last.
+            </p>
+        </div>
+        <div class="flex flex-col md:flex-row flex-grow overflow-hidden">
+            <div class="md:w-64 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto hidden md:block">
+                <div class="bg-white border-2 border-gray-300 rounded-xl p-4 shadow-sm">
+                    <h3 class="font-bold text-center text-gray-700 border-b-2 border-gray-200 pb-2 mb-4">WORD BOX</h3>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-400 font-bold mb-1 uppercase">Who?</p>
+                        <div class="word-bank-box" onclick="insertWord('Leo')">Leo</div>
+                        <div class="word-bank-box" onclick="insertWord('he')">he</div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-400 font-bold mb-1 uppercase">When?</p>
+                        <div class="word-bank-box" onclick="insertWord('First,')">First,</div>
+                        <div class="word-bank-box" onclick="insertWord('Next,')">Next,</div>
+                        <div class="word-bank-box" onclick="insertWord('Then,')">Then,</div>
+                        <div class="word-bank-box" onclick="insertWord('At last,')">At last,</div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-xs text-gray-400 font-bold mb-1 uppercase">What?</p>
+                        <div class="grid grid-cols-1 gap-1">
+                            <div class="word-bank-box" onclick="insertWord('digs')">digs</div>
+                            <div class="word-bank-box" onclick="insertWord('plants')">plants</div>
+                            <div class="word-bank-box" onclick="insertWord('water')">water</div>
+                            <div class="word-bank-box" onclick="insertWord('seed')">seed</div>
+                            <div class="word-bank-box" onclick="insertWord('hole')">hole</div>
+                            <div class="word-bank-box" onclick="insertWord('sun')">sun</div>
+                            <div class="word-bank-box" onclick="insertWord('flower')">flower</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-grow flex flex-col relative bg-white">
+                <div class="bg-white p-2 border-b border-gray-200 flex gap-2 overflow-x-auto justify-center">
+                    <img src="https://drive.google.com/uc?export=view&id=1DeqJ7jFjueGmOI_7GXe2xFjkBlAB6Owe" 
+                         onerror="this.src='https://placehold.co/120x100?text=Error'"
+                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    
+                    <img src="https://drive.google.com/uc?export=view&id=1f_LZ0YhdRLZZYebGFTc8nu2R8SInWQtz" 
+                         onerror="this.src='https://placehold.co/120x100?text=Error'"
+                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    
+                    <img src="https://drive.google.com/uc?export=view&id=1l-ij32XbZyomhCSDvKWGv2jLdq6kjNkc" 
+                         onerror="this.src='https://placehold.co/120x100?text=Error'"
+                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                    
+                    <img src="https://drive.google.com/uc?export=view&id=11DDef72m1JHeU3zFmpdAT4nYEI_o06ib" 
+                         onerror="this.src='https://placehold.co/120x100?text=Error'"
+                         class="rounded-lg border border-gray-300 shadow-sm" style="height: 100px;">
+                </div>
+                <div class="p-4 md:p-8 flex-grow flex flex-col">
+                    <textarea id="final-essay" 
+                        class="w-full flex-grow p-6 text-gray-800 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:ring-0 outline-none lined-paper resize-none transition"
+                        placeholder="One day, Leo..."></textarea>
+                    <div class="mt-4 flex justify-between items-center">
+                        <div class="text-sm text-gray-400">Words: <span id="word-count">0</span></div>
+                        <button onclick="finishTest()" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 font-bold shadow-md transform hover:scale-105 transition flex items-center gap-2">
+                            <i class="fa-solid fa-check-circle"></i> I'm Finished
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="report-screen" class="w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-200 screen-hidden mb-10">
+        <div class="bg-green-600 text-white p-6 rounded-t-2xl flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Great Job!</h1>
+        </div>
+        <div class="p-8">
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-green-50 p-6 rounded-xl text-center border border-green-100 flex flex-col justify-center">
+                    <div class="text-xs text-green-600 font-bold uppercase tracking-widest">WIDA Level</div>
+                    <div id="score-val" class="text-6xl font-black text-green-700 my-3">--</div>
+                    <div id="score-text" class="text-green-600 font-medium px-4 py-1 bg-green-100 rounded-full inline-block mx-auto">--</div>
+                </div>
+                <div class="md:col-span-2 flex flex-col gap-3">
+                    <h3 class="font-bold text-gray-700 border-b pb-2 mb-1">Teacher Feedback (WIDA Rubric)</h3>
+                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <span class="font-bold text-gray-700 text-sm uppercase block mb-1">Discourse (Narrative Structure)</span>
+                        <p id="complexity-feedback" class="text-gray-600 text-sm">Loading...</p>
+                    </div>
+                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                        <span class="font-bold text-gray-700 text-sm uppercase block mb-1">Word/Phrase (Precision)</span>
+                        <p id="vocab-feedback" class="text-gray-600 text-sm">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <h3 class="font-bold text-gray-800 mb-2">Can Do Descriptor (Next Steps)</h3>
+                <p id="strategy-text" class="text-gray-700 leading-relaxed text-sm"></p>
+            </div>
+            <div class="mt-8 text-center">
+                <button onclick="location.reload()" class="text-green-600 font-bold hover:text-green-800 hover:underline transition text-lg">
+                    Start New Test
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="fixed inset-0 bg-white/95 z-50 flex flex-col items-center justify-center screen-hidden backdrop-blur-sm">
+        <div class="w-20 h-20 border-8 border-gray-200 border-t-green-500 rounded-full animate-spin mb-6"></div>
+        <h2 class="text-2xl font-bold text-gray-800">Checking your story...</h2>
+        <p class="text-gray-500 mt-2">Good luck!</p>
+    </div>
+
+    <script>
+        // CONFIG
+        let GEMINI_API_KEY = 'AIzaSy_PASTE_YOUR_KEY_HERE'; 
+        
+        // STORY DATA (Links reverted to standard format)
+        const storyData = [
+            { 
+                text: "One sunny morning, Leo decides to make a garden. First, he takes his shovel and digs a small hole in the brown soil.", 
+                // STEP 1: DIGGING
+                img: "https://drive.google.com/uc?export=view&id=1DeqJ7jFjueGmOI_7GXe2xFjkBlAB6Owe" 
+            },
+            { 
+                text: "Leo has a packet of seeds. Next, he carefully drops one tiny seed into the hole and covers it up.", 
+                // STEP 2: SEED
+                img: "https://drive.google.com/uc?export=view&id=1f_LZ0YhdRLZZYebGFTc8nu2R8SInWQtz" 
+            },
+            { 
+                text: "The seed is thirsty! Then, Leo uses his watering can to give the seed a drink. He waits and waits.", 
+                // STEP 3: WATERING
+                img: "https://drive.google.com/uc?export=view&id=1l-ij32XbZyomhCSDvKWGv2jLdq6kjNkc" 
+            },
+            { 
+                text: "At last, the sun shines on the garden. A green stem pops up. Look, it is a beautiful yellow flower!", 
+                // STEP 4: FLOWER
+                img: "https://drive.google.com/uc?export=view&id=11DDef72m1JHeU3zFmpdAT4nYEI_o06ib" 
+            }
+        ];
+
+        let responses = { q1: "", q2: "", q3: "", essay: "" };
+        let currentStoryIndex = 0;
+
+        // --- GLOBAL FUNCTIONS (Attached to window to prevent scope issues) ---
+
+        window.speakText = function(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.rate = 0.9; 
+                window.speechSynthesis.speak(u);
+            } else {
+                console.warn("TTS not supported in this browser.");
+            }
+        };
+
+        window.insertWord = function(word) {
+            const textarea = document.getElementById('final-essay');
+            textarea.value += word + " ";
+            textarea.focus();
+        };
+
+        window.switchScreen = function(screenId) {
+            console.log("Switching to:", screenId); 
+            const screens = ['welcome-screen', 'part-a-screen', 'story-sequence-screen', 'writing-screen', 'report-screen'];
+            
+            // Hide all
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('screen-hidden');
+                    el.classList.remove('fade-in-active'); 
+                }
+            });
+
+            // Show target
+            const target = document.getElementById(screenId);
+            if(target) {
+                target.classList.remove('screen-hidden');
+                target.classList.add('fade-in-active'); 
+            }
+        };
+
+        window.updateProgress = function(step) {
+            [1,2,3].forEach(i => {
+                const el = document.getElementById(`progress-${i}`);
+                if(el) el.classList.remove('step-active');
+            });
+            const activeEl = document.getElementById(`progress-${step}`);
+            if(activeEl) activeEl.classList.add('step-active');
+            
+            const titleEl = document.getElementById('step-title');
+            if(titleEl) {
+                if(step === 1) titleEl.innerText = "Part A: Questions";
+                if(step === 2) titleEl.innerText = "Part B: Listen";
+                if(step === 3) titleEl.innerText = "Part B: Write";
+            }
+        };
+
+        window.startTest = function() {
+            console.log("Starting test..."); 
+            window.switchScreen('part-a-screen');
+            const header = document.getElementById('app-header');
+            if(header) header.classList.remove('screen-hidden');
+            window.updateProgress(1);
+        };
+
+        window.submitPartA = function() {
+            responses.q1 = document.getElementById('q1').value;
+            responses.q2 = document.getElementById('q2').value;
+            responses.q3 = document.getElementById('q3').value;
+            currentStoryIndex = 0;
+            window.loadStoryPart(0);
+            window.switchScreen('story-sequence-screen');
+            window.updateProgress(2);
+        };
+
+        window.playIntroAudio = function() {
+            window.speakText("Leo works hard in the garden. He follows steps to make things grow. Listen to the story about Leo's garden.");
+        };
+
+        window.loadStoryPart = function(index) {
+            const data = storyData[index];
+            const imgEl = document.getElementById('seq-img');
+            const textEl = document.getElementById('seq-text');
+            const numEl = document.getElementById('seq-num');
+
+            if(imgEl) imgEl.src = data.img;
+            if(textEl) textEl.innerText = data.text;
+            if(numEl) numEl.innerText = index + 1;
+        };
+
+        window.speakCurrentPart = function() {
+            const text = storyData[currentStoryIndex].text;
+            window.speakText(text);
+        };
+
+        window.nextStoryPart = function() {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            
+            if (currentStoryIndex < storyData.length - 1) {
+                currentStoryIndex++;
+                window.loadStoryPart(currentStoryIndex);
+            } else {
+                window.switchScreen('writing-screen');
+                window.updateProgress(3);
+                window.speakText("Now it is your turn. Write a story about what Leo does in the garden.");
+            }
+        };
+
+        window.finishTest = async function() {
+            responses.essay = document.getElementById('final-essay').value;
+            if(responses.essay.length < 5) {
+                if(!confirm("You didn't write very much. Are you sure you are done?")) return;
+            }
+            document.getElementById('loading-overlay').classList.remove('screen-hidden');
+            await window.gradeAssessment();
+        };
+
+        window.gradeAssessment = async function() {
+            // SIMULATION MODE
+            if (GEMINI_API_KEY.includes("PASTE") || GEMINI_API_KEY === "") {
+                console.log("Simulating Grading...");
+                await new Promise(r => setTimeout(r, 1500));
+
+                const wordCount = responses.essay.split(' ').length;
+                let score = "2.0";
+                let label = "Emerging";
+                
+                if (wordCount > 40) { score = "3.5"; label = "Developing"; }
+                else if (wordCount > 15) { score = "2.5"; label = "Emerging"; }
+
+                const mockData = {
+                    score_num: score,
+                    score_label: label,
+                    complexity_feedback: "You told a story about Leo. You used words like 'First' and 'Next' to show when things happened.",
+                    vocab_feedback: "You used good garden words like 'shovel', 'soil', and 'tiny seed'.",
+                    teacher_strategy: "CAN DO: Write short narratives with a clear sequence of events. NEXT STEP: Encourage adding feelings (e.g., 'Leo was happy')."
+                };
+                
+                window.displayResults(mockData);
+                return;
+            }
+
+            // REAL API MODE
+            const prompt = `
+            Task: Grade WIDA Writing (Grades 1-2).
+            Topic: "Leo's Garden" (Narrative).
+            Student Essay: "${responses.essay.replace(/"/g, '\\"')}"
+            Rubric Focus:
+            1. Discourse: Does the student tell a story with a beginning, middle, and end? (Sequencing)
+            2. Word/Phrase: Specific Vocabulary (Leo, shovel, soil, seed) vs generic words.
+            Output JSON: { "score_num": "1.0-6.0", "score_label": "Level", "complexity_feedback": "text", "vocab_feedback": "text", "teacher_strategy": "Use WIDA Can-Do Descriptor language." }
+            `;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                const data = await response.json();
+                let text = data.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, '').trim();
+                window.displayResults(JSON.parse(text));
+
+            } catch (e) {
+                alert("API Error. Using simulation.");
+                console.error(e);
+                document.getElementById('loading-overlay').classList.add('screen-hidden');
+            }
+        };
+
+        window.displayResults = function(json) {
+            document.getElementById('score-val').innerText = json.score_num;
+            document.getElementById('score-text').innerText = json.score_label;
+            document.getElementById('complexity-feedback').innerText = json.complexity_feedback;
+            document.getElementById('vocab-feedback').innerText = json.vocab_feedback;
+            document.getElementById('strategy-text').innerText = json.teacher_strategy;
+
+            document.getElementById('loading-overlay').classList.add('screen-hidden');
+            document.getElementById('app-header').classList.add('screen-hidden');
+            window.switchScreen('report-screen');
+        };
+
+        // SETUP LISTENERS
+        window.onload = function() {
+            const essayBox = document.getElementById('final-essay');
+            if(essayBox) {
+                essayBox.addEventListener('input', function(e) {
+                    const words = e.target.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                    const counter = document.getElementById('word-count');
+                    if(counter) counter.innerText = words;
+                });
+            }
+        };
+    </script>
+</body>
+</html>
